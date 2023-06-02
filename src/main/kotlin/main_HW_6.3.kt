@@ -74,14 +74,9 @@ data class Donut(
 )
 
 //***************************************************************************************************
-interface Attachments {
-    val type: String
-}
+sealed class Attachments (val type: String)
 
-class AudioAttachment(
-    override val type: String = "Audio",
-    private val audio: Audio = Audio()
-) : Attachments {
+data class AudioAttachment(private val audio: Audio) : Attachments ("Audio") {
     override fun toString(): String {
         return type + audio
     }
@@ -102,10 +97,7 @@ data class Audio(
     val isHq: Int = 1
 )
 
-class PhotoAttachment(
-    override val type: String = "Photo",
-    private val photo: Photo = Photo(),
-) : Attachments {
+data class PhotoAttachment(private val photo: Photo) : Attachments ("Photo") {
     override fun toString(): String {
         return type + photo
     }
@@ -130,10 +122,7 @@ data class Copy (
     val height: Int = 15
 )
 
-class DocumentAttachment(
-    override val type: String = "Document",
-    private val document: Document = Document ()
-) : Attachments {
+data class DocumentAttachment (private val document: Document) : Attachments ("Document") {
     override fun toString(): String {
         return type + document
     }
@@ -150,10 +139,7 @@ data class Document (
     val type: Int = 1,
 )
 
-class NoteAttachment(
-    override val type: String = "Note",
-    private val note: Note = Note ()
-) : Attachments {
+data class NoteAttachment (private val note: Note) : Attachments ("Note") {
     override fun toString(): String {
         return type + note
     }
@@ -174,10 +160,7 @@ data class Note (
     val textWiki: String = "text_wiki"
 )
 
-class VideoAttachment(
-    override val type: String = "Video",
-    private val video: Video = Video()
-) : Attachments {
+data class VideoAttachment (private val video: Video) : Attachments ("Video") {
     override fun toString(): String {
         return type + video
     }
@@ -232,12 +215,11 @@ class Wall {
 //**********************************************************************************
 fun main() {
 
-    val audio = AudioAttachment()
-    val photo = PhotoAttachment()
-    val document = DocumentAttachment()
-    val note = NoteAttachment()
-    val video = VideoAttachment()
-
+    val audio = AudioAttachment(Audio())
+    val photo = PhotoAttachment(Photo())
+    val document = DocumentAttachment(Document())
+    val note = NoteAttachment(Note())
+    val video = VideoAttachment(Video())
 
     val attachments = arrayOf(audio, photo, document, note, video)
 

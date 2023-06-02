@@ -5,11 +5,11 @@ class WallTestHW5 {
 
     @Test
     fun add() {
-        val audio = AudioAttachment()
-        val photo = PhotoAttachment()
-        val document = DocumentAttachment()
-        val note = NoteAttachment()
-        val video = VideoAttachment()
+        val audio = AudioAttachment(Audio())
+        val photo = PhotoAttachment(Photo())
+        val document = DocumentAttachment(Document())
+        val note = NoteAttachment(Note())
+        val video = VideoAttachment(Video())
 
         val attachments = arrayOf(audio, photo, document, note, video)
 
@@ -33,11 +33,11 @@ class WallTestHW5 {
 
     @Test
     fun updateExisting() {
-        val audio = AudioAttachment()
-        val photo = PhotoAttachment()
-        val document = DocumentAttachment()
-        val note = NoteAttachment()
-        val video = VideoAttachment()
+        val audio = AudioAttachment(Audio())
+        val photo = PhotoAttachment(Photo())
+        val document = DocumentAttachment(Document())
+        val note = NoteAttachment(Note())
+        val video = VideoAttachment(Video())
 
         val attachments = arrayOf(audio, photo, document, note, video)
         // создаём целевой сервис
@@ -94,11 +94,11 @@ class WallTestHW5 {
 
     @Test
     fun updateNonExisting() {
-        val audio = AudioAttachment()
-        val photo = PhotoAttachment()
-        val document = DocumentAttachment()
-        val note = NoteAttachment()
-        val video = VideoAttachment()
+        val audio = AudioAttachment(Audio())
+        val photo = PhotoAttachment(Photo())
+        val document = DocumentAttachment(Document())
+        val note = NoteAttachment(Note())
+        val video = VideoAttachment(Video())
 
         val attachments = arrayOf(audio, photo, document, note, video)
         // создаём целевой сервис
