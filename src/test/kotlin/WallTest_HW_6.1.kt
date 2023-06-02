@@ -1,6 +1,6 @@
 import org.junit.Assert.*
 import org.junit.Test
-/*
+
 class WallTestHW5 {
 
     @Test
@@ -114,4 +114,3 @@ class WallTestHW5 {
     }
 }
 
-*/
