@@ -25,6 +25,7 @@ data class Post(
     val views: Views? = Views(),
     val geo: Geo = Geo(),
     val donut: Donut = Donut(),
+    val attachments: Array <Attachments>
 )
 
 
@@ -73,6 +74,131 @@ data class Donut(
 )
 
 //***************************************************************************************************
+interface Attachments {
+    val type: String
+}
+
+class AudioAttachment(
+    override val type: String = "Audio",
+    private val audio: Audio = Audio()
+) : Attachments {
+    override fun toString(): String {
+        return type + audio
+    }
+}
+
+data class Audio(
+    val id: Int = 1,
+    val ownerId: Int = 1,
+    val artist: String = "artist1",
+    val title: String = "title1",
+    val duration: Int = 5,
+    val url: String = "www.url",
+    val lyricsId: Int = 1,
+    val albumId: Int = 1,
+    val genreId: Int = 1,
+    val date: Int = 111123,
+    val noSearch: Int = 1,
+    val isHq: Int = 1
+)
+
+class PhotoAttachment(
+    override val type: String = "Photo",
+    private val photo: Photo = Photo(),
+) : Attachments {
+    override fun toString(): String {
+        return type + photo
+    }
+}
+
+data class Photo (
+    val id: Int = 2,
+    val ownerId: Int = 2,
+    val albumId: Int = 2,
+    val userId: Int =2,
+    val text: String = "photo1",
+    val date: Int = 222222,
+    val width: Int = 2222,
+    val height: Int = 2222,
+    val sizes: Array <Copy> = arrayOf(Copy ())
+)
+
+data class Copy (
+    val type: String = "type",
+    val url: String = "url",
+    val width: Int = 10,
+    val height: Int = 15
+)
+
+class DocumentAttachment(
+    override val type: String = "Document",
+    private val document: Document = Document ()
+) : Attachments {
+    override fun toString(): String {
+        return type + document
+    }
+}
+
+data class Document (
+    val id: Int = 3,
+    val ownerId: Int = 3,
+    val title: String = "title Doc",
+    val size: Int = 3,
+    val ext: String = "doc",
+    val url: String = "url",
+    val date: Int = 33333,
+    val type: Int = 1,
+)
+
+class NoteAttachment(
+    override val type: String = "Note",
+    private val note: Note = Note ()
+) : Attachments {
+    override fun toString(): String {
+        return type + note
+    }
+}
+
+data class Note (
+    val id: Int = 4,
+    val ownerId: Int = 4,
+    val title: String = "title Note",
+    val text: String = "text Note",
+    val date: Int = 44444,
+    val comments: Int = 4,
+    val readComments: Int = 4,
+    val viewUrl: String = "view url",
+    val privacyView: String = "public",
+    val privacyComment: String = "public",
+    val canComment: Boolean = true,
+    val textWiki: String = "text_wiki"
+)
+
+class VideoAttachment(
+    override val type: String = "Video",
+    private val video: Video = Video()
+) : Attachments {
+    override fun toString(): String {
+        return type + video
+    }
+}
+
+data class Video(
+    val id: Int = 5,
+    val ownerId: Int = 5,
+    val title: String = "title video",
+    val description: String = "description video",
+    val duration: Int = 5,
+    val views: Int = 5,
+    val date: Int = 55555,
+    val addingDate: Int = 55,
+    val localViews: Int = 5,
+    val comments: Int = 5
+)
+
+
+
+//***************************************************************************************************
 
 class Wall {
 
@@ -106,6 +232,15 @@ class Wall {
 //**********************************************************************************
 fun main() {
 
+    val audio = AudioAttachment()
+    val photo = PhotoAttachment()
+    val document = DocumentAttachment()
+    val note = NoteAttachment()
+    val video = VideoAttachment()
+
+
+    val attachments = arrayOf(audio, photo, document, note, video)
+
     val post1 = Post(
         101, 11, 111, 1111, 11111, "1", 111111, 1111111, false, "reply", 11111111,
         canPin = true,
@@ -115,6 +250,7 @@ fun main() {
         markedAsAds = false,
         isFavourite = false,
         postponedId = 111111111,
+        attachments = attachments
     )
 
     val post2 = Post(
@@ -128,8 +264,8 @@ fun main() {
         postponedId = 222222222,
         comment = Comments(30),
         like = Likes(500),
-
-        )
+        attachments = attachments
+    )
 
     println(post1)
     println(post2)
@@ -140,7 +276,7 @@ fun main() {
     val postWithUniqueId = Wall()
     postWithUniqueId.add(post1)
     postWithUniqueId.add(post2)
-
+    println(post1)
     println(postWithUniqueId.getAllPosts())
 
 
@@ -153,8 +289,8 @@ fun main() {
         markedAsAds = false,
         isFavourite = false,
         postponedId = 111111111,
-
-        )
+        attachments = attachments
+    )
     println(postWithUniqueId.update(post3))
     println(postWithUniqueId.getAllPosts())
 
